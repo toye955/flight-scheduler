@@ -10,7 +10,7 @@ export const flightSlice = createSlice({
   initialState,
   reducers: {
     setFlightData: (state, { payload }) => {
-      state.data = payload.data;
+      state.data = [...state.data, ...payload.data];
       state.pagination = payload.pagination;
     },
   },

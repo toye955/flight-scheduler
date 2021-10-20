@@ -1,5 +1,5 @@
-import { Fragment, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AircraftList from "../components/aircrafts/AircraftList";
 import SchedulingDate from "../components/date/SchedulingDate";
 import FlightList from "../components/flights/FlightList";
@@ -11,6 +11,8 @@ import { getFlights } from "../services/flight.service";
 
 const FlightSchedulingDashboard = () => {
   const dispatch = useDispatch();
+  const { data, pagination } = useSelector((state) => state.flights);
+  const [loadedAllData, setLoadedAllData] = useState(false);
 
   const fetchAircrafts = async () => {
     try {
@@ -22,13 +24,23 @@ const FlightSchedulingDashboard = () => {
     }
   };
 
-  const fetchFlights = async () => {
+  const fetchFlights = async (offset = 0, limit = 25) => {
     try {
-      const response = await getFlights();
+      const response = await getFlights(offset, limit);
       const data = await response.json();
       dispatch(setFlightData(data));
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  const loadMoreFlights = () => {
+    if (data.length < pagination.total) {
+      const offset = pagination.offset + pagination.limit;
+      const limit = pagination.limit;
+      fetchFlights(offset, limit);
+    } else {
+      setLoadedAllData(true);
     }
   };
 
@@ -43,7 +55,10 @@ const FlightSchedulingDashboard = () => {
       <div className="dashboard">
         <AircraftList />
         <RotationList />
-        <FlightList />
+        <FlightList
+          loadMoreFlights={loadMoreFlights}
+          loadedAllData={loadedAllData}
+        />
       </div>
     </Fragment>
   );

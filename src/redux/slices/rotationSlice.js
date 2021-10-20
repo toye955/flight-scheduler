@@ -11,7 +11,11 @@ const initialState = {
 const isFlightActiveAtMidnight = (payload) => {
   const departuretime = getTimeInInteger(payload.readable_departure);
   const arrivaltime = getTimeInInteger(payload.readable_arrival);
-  if (departuretime <= 2399 && arrivaltime <= 2399) {
+  if (
+    departuretime <= 2399 &&
+    arrivaltime <= 2399 &&
+    arrivaltime > departuretime
+  ) {
     return false;
   }
   return true;
@@ -30,19 +34,35 @@ const isTurnAroundTimeValid = (data, currentFlight) => {
     index + 1 > sortedRotationList.length - 1
       ? null
       : sortedRotationList[index + 1];
-    const date = dayjs().add(1, 'day').format('YYYY-MM-DD')
+  const date = dayjs().add(1, "day").format("YYYY-MM-DD");
   if (flightBefore !== null) {
-    const flightBeforeArrivaltime = dayjs(`${date} ${flightBefore.readable_arrival}`) 
-    const currentFlightDepartureTime = dayjs(`${date} ${currentFlight.readable_departure}`) 
-    const beforediff = currentFlightDepartureTime.diff(flightBeforeArrivaltime, "minutes", true)
+    const flightBeforeArrivaltime = dayjs(
+      `${date} ${flightBefore.readable_arrival}`
+    );
+    const currentFlightDepartureTime = dayjs(
+      `${date} ${currentFlight.readable_departure}`
+    );
+    const beforediff = currentFlightDepartureTime.diff(
+      flightBeforeArrivaltime,
+      "minutes",
+      true
+    );
     if (beforediff < 20) {
       return false;
     }
   }
   if (flightAfter !== null) {
-    const flightAfterDepartureTime = dayjs(`${date} ${flightAfter.readable_departure}`)
-    const currentFlightArrivalTime = dayjs(`${date} ${currentFlight.readable_arrival}`)
-    const afterDiff = flightAfterDepartureTime.diff(currentFlightArrivalTime, "minutes", true)
+    const flightAfterDepartureTime = dayjs(
+      `${date} ${flightAfter.readable_departure}`
+    );
+    const currentFlightArrivalTime = dayjs(
+      `${date} ${currentFlight.readable_arrival}`
+    );
+    const afterDiff = flightAfterDepartureTime.diff(
+      currentFlightArrivalTime,
+      "minutes",
+      true
+    );
     if (afterDiff < 20) {
       return false;
     }
@@ -56,7 +76,7 @@ export const rotationSlice = createSlice({
   reducers: {
     setRotationData: (state, { payload }) => {
       if (isFlightActiveAtMidnight(payload)) {
-        toast.error("Flight should not be active at midnight");
+        toast.error("Aircraft must be on ground at midnight.");
         return;
       }
       if (!isTurnAroundTimeValid(state.data, payload)) {

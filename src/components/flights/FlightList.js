@@ -1,8 +1,9 @@
+import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setRotationData } from "../../redux/slices/rotationSlice";
 import Flight from "./Flight";
 
-const FlightList = () => {
+const FlightList = ({ loadMoreFlights, loadedAllData }) => {
   const flightsdata = useSelector((state) => state.flights.data);
   const dispatch = useDispatch();
 
@@ -23,6 +24,11 @@ const FlightList = () => {
                 handleClick={handleClick}
               />
             ))}
+          <div style={{ textAlign: "center", marginTop: 16 }}>
+            {flightsdata.length && !loadedAllData ? (
+              <Button variant="outlined" onClick={() => loadMoreFlights()}>Load more</Button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
