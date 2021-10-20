@@ -15,6 +15,7 @@ The components can be found in the components folder and the dashboard itself ca
 
 ### Implementation
 
-I followed react principles working on this project so there aren't exactly much specifics to point out. 
-Regarding the timeline bar, i search for libraries tha could help with that, after spending sometime searching with no success, i decided to write the component myself. I wrote an algorithm for determining the idle, scheduled and turnaround times, saved them in an array and used the array to build the timeline.
+The Api calls are made in the dashboard and the data is kept in the redux store. Reason for implementing with redux is to make the data available in all the parts of the application and also to make data update and manipulation reflects from a single source of truth.
+
+Regarding the timeline bar, i searched for libraries that could help with that, after spending sometime searching with no success, i decided to write the component myself. I wrote an algorithm for determining the idle, scheduled and turnaround times, saved them in an array and used the array to build the timeline.
 
