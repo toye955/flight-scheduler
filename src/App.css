@@ -1,0 +1,145 @@
+.app {
+  max-width: 1000px;
+  margin: auto;
+}
+.dashboard {
+  display: flex;
+}
+
+.aircraft{
+  margin-top: 16px;
+}
+
+.aircraft-list {
+  width: 250px;
+  margin: 16px;
+}
+
+.aircraft-list-container {
+  background-color: #f5f6f9;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.aircraft-list-container-scroll {
+  height: 600px;
+  overflow: auto;
+}
+
+.aircraft-list-title {
+  text-align: center;
+}
+
+.aircraft-details {
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.rotation {
+  margin-top: 16px;
+}
+.rotation-list {
+  width: 400px;
+  margin: 16px;
+}
+
+.rotation-list-container {
+  background-color: #f5f6f9;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.rotation-list-container-scroll {
+  height: 500px;
+  overflow: auto;
+}
+
+.rotation-list-title {
+  text-align: center;
+}
+
+.rotation-details {
+  width: 100%;
+  cursor: pointer;
+}
+
+.rotation-details__trip,
+.rotation-details__time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.rotation-nodata {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 50%;
+  color: #888;
+}
+
+.rotation-nodata span {
+  font-weight: bold;
+}
+
+.rotation-timeline {
+  margin-top: 16px;
+}
+
+.flight {
+  margin-top: 16px;
+}
+.flight-list {
+  width: 300px;
+  margin: 16px;
+}
+
+.flight-list-container {
+  background-color: #f5f6f9;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.flight-list-container-scroll {
+  height: 600px;
+  overflow: auto;
+}
+
+.flight-list-title {
+  text-align: center;
+}
+
+.flight-details {
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.flight-details__trip,
+.flight-details__time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.timeline-intervals {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeline-bar {
+  display: flex;
+  margin-top: 8px;
+  height: 60px;
+  width: 100%;
+  background-color: #b4b5b9;
+}
+
+.date {
+  display: flex;
+  width: 300px;
+  margin: auto;
+  margin-top: 16px;
+}
